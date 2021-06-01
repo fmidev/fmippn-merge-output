@@ -68,6 +68,8 @@ def combine_fmippn_h5_files(file1,file2):
     
 def main():    
 
+    print("Input files:",options.inputfilelist)
+    
     #Copy file1 to output filename
     cp_command='cp ' + options.inputfilelist[0] + ' ' + options.outfile
     os.system(cp_command)

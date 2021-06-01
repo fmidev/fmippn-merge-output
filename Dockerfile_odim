@@ -19,8 +19,5 @@ RUN pip install -r requirements.txt
 # command to run on container start
 ENV outdir "/output"
 ENV outfile "nc_test.h5"
-ENV indir "/input"
-ENV infile1 "infile1.h5"
-ENV infile2 "infile2.h5"
-ENV infile3 "infile3.h5"
-ENTRYPOINT python combine_ppn_outputs_odim.py --outfile=$outdir/$outfile --inputfilelist $indir/$infile1 $indir/$infile2 $indir/$infile3 
+ENV infilelist /input/infile1.h5 /input/infile2.h5 /input/infile3.h5
+ENTRYPOINT python combine_ppn_outputs_odim.py --outfile=$outdir/$outfile --inputfilelist $infilelist 
