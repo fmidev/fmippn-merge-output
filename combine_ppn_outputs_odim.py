@@ -26,11 +26,16 @@ def combine_fmippn_h5_files(file1,file2):
     f1=h5py.File(file1, 'a')
     f2=h5py.File(file2, 'r')
     
-    # Read ensemble size and number of timesteps from attributes
+    # Read ensemble size from attributes
     ensemble_size_file1=int(f1['/how'].attrs.__getitem__('ensemble_size'))
     ensemble_size_file2=int(f2['/how'].attrs.__getitem__('ensemble_size'))
-    num_timesteps_file2=int(f2['/how'].attrs.__getitem__('num_timesteps'))
 
+    # Read nowcast_timestep and max_leadtime from attributes and calculate
+    # number of timesteps
+    nowcast_timestep_file2 = int(f2['/how'].attrs.__getitem__('nowcast_timestep'))
+    max_leadtime_file2 = int(f2['/how'].attrs.__getitem__('max_leadtime'))
+    num_timesteps_file2=int(max_leadtime_file2/nowcast_timestep_file2)
+    
     print(ensemble_size_file1,ensemble_size_file2,num_timesteps_file2)
 
     for member in range(1,ensemble_size_file2+1):
